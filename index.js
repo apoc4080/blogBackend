@@ -3,6 +3,7 @@ const express = require("express")
 const app = express()
 const dotenv = require("dotenv")
 const mongoose = require("mongoose")
+const cors = require("cors")
 
 //---- step : 3
 const multer = require("multer")
@@ -18,6 +19,7 @@ const authCat = require("./routes/categories")
 dotenv.config()
 //---- step : 2.2
 app.use(express.json())
+app.use(cors())
 //---- step : 2.3 last ma file crate garne time
 app.use("/images", express.static(path.join(__dirname, "/images")))
 
