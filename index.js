@@ -55,6 +55,20 @@ app.use("/users", authUser)
 app.use("/posts", authPost)
 app.use("/category", authCat)
 
+
+app.get('/news', async (req, res) => {
+  try {
+    const apiKey = process.env.REACT_APP_NEWS_API_KEY;
+    const apiUrl = `https://newsapi.org/v2/everything?q=queer%20lgbtq%20india&sortBy=popularity&apiKey=${apiKey}`;
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 //---- step : 1.2
 app.listen("5000", () => {
   console.log("backend running...")
